@@ -152,7 +152,7 @@ public class DrawFinal extends JFrame {
     //Acciones de Dibujar
     switch(this.Dibujar)
     {
-      case 1:  g2.drawLine(this.x1 +xfix, this.y1 +yfix, this.x2+xfix, this.y2+yfix );;setPosition(this.x2,this.y2);break;
+      case 1:  g2.drawLine(this.x1 +xfix, this.y1 +yfix, this.x2+xfix, this.y2+yfix );setPosition(this.x2,this.y2);break;
 
     }
     this.Dibujar = 0;
