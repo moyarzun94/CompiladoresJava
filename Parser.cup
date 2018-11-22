@@ -1,96 +1,70 @@
 import java.io.*;
 import java_cup.runtime.*;
-
 action code
 {:
       DrawFinal Dibujar = new DrawFinal();
-
       public void salir()
       {
-		System.out.println("Presione cualquier tecla para Terminar.");
-		try
-		{
-		InputStreamReader reader = new InputStreamReader(System.in);
-		BufferedReader buffer = new BufferedReader(reader);
+        System.out.println("Presione cualquier tecla para Terminar.");
+        try
+        {
+        InputStreamReader reader = new InputStreamReader(System.in);
+        BufferedReader buffer = new BufferedReader(reader);
                 buffer.readLine();
-		}
-		catch (Exception e) {
-		  System.exit(0);
-		}
-		System.exit(0);
+        }
+        catch (Exception e) {
+          System.exit(0);
+        }
+        System.exit(0);
       }
 :}
 parser code {:
-
-	static parser analizador;
-	public static void main (String argv[]) throws Exception
-	{
-
-		analizador = new parser(new Scan(new InputStreamReader(System.in)));
-
+    static parser analizador;
+    public static void main (String argv[]) throws Exception
+    {
+        analizador = new parser(new Scan(new InputStreamReader(System.in)));
     try
-		{
-		  analizador.parse();
-		}
-		catch(Exception e)
-		{
-		  e.printStackTrace();
-		  System.out.println("Error fatal");
-		}
-	}
-
-
+        {
+          analizador.parse();
+        }
+        catch(Exception e)
+        {
+          e.printStackTrace();
+          System.out.println("Error fatal");
+        }
+    }
 :};
-
 terminal EQ, COMA, LP, RP;
 terminal COLOR,SALTOLI , ABA, ARR, DER ,TERMINO, DAVALOR, IZQ, POS, EDITAR;
-
 terminal String NCOLOR, NUMERO;
-
 terminal String ID;
-
 non terminal Inicio, Inst, Color, Linea,Pos,Termino, DaValor;
 non terminal String  IdVar, IdCol, Dato;
-
-Inicio	::= EDITAR SALTOLI Inst
-	    {:
-
-	    :};
-Termino	::= TERMINO
-	    {:
-		salir();
-	    :};
-
-Inst	::= Pos SALTOLI Inst | Color SALTOLI Inst |Linea SALTOLI Inst | DaValor SALTOLI Inst | Termino SALTOLI;
-
-
-Pos	::= POS LP IdVar:E1 COMA IdVar:E2 RP
-	    {:
+Inicio  ::= EDITAR SALTOLI Inst
+        {:
+        :};
+Termino ::= TERMINO
+        {:
+        salir();
+        :};
+Inst    ::= Pos SALTOLI Inst | Color SALTOLI Inst |Linea SALTOLI Inst | DaValor SALTOLI Inst | Termino SALTOLI;
+Pos ::= POS LP IdVar:E1 COMA IdVar:E2 RP
+        {:
       Dibujar.setPosition(Integer.valueOf(E1),Integer.valueOf(E2));
-
-
-	    :};
-
-
-
-Color	::= COLOR LP IdCol:E1 RP
-	    {:
-
-		  Dibujar.setColor(E1);
-
-	    :}
+        :};
+Color   ::= COLOR LP IdCol:E1 RP
+        {:
+          Dibujar.setColor(E1);
+        :}
       ;
-
-Linea	::= DER LP IdVar:E1 RP
-	    {:
-		  Dibujar.drawLinea(Integer.valueOf(E1),"der");
-	    :}
-
+Linea   ::= DER LP IdVar:E1 RP
+        {:
+          Dibujar.drawLinea(Integer.valueOf(E1),"der");
+        :}
       | IZQ LP IdVar:E1 RP
       {:
         Dibujar.drawLinea(Integer.valueOf(E1),"izq");
         :}
-
       | ARR LP IdVar:E1 RP
         {:
           Dibujar.drawLinea(Integer.valueOf(E1),"arr");
@@ -99,28 +73,18 @@ Linea	::= DER LP IdVar:E1 RP
         {:
           Dibujar.drawLinea(Integer.valueOf(E1),"aba");
           :};
-
-
-DaValor ::=  DAVALOR ID:E1 EQ NCOLOR:E2
-	    {:
-		Dibujar.toStringTable(E1,E2);
-	    :};
-
-DaValor ::=  DAVALOR ID:E1 EQ NUMERO:E2
-	    {:
-		Dibujar.toStringTable(E1,E2);
-	    :};
-
-
+DaValor ::=  DAVALOR ID:E1 EQ Dato:E2
+        {:
+        Dibujar.toStringTable(E1,E2);
+        :};
 Dato ::=  NUMERO:E1
-	    {:
-		RESULT = E1;
-	    :}
+        {:
+        RESULT = E1;
+        :}
       | NCOLOR:E1
      {:
    RESULT = E1;
      :};
-
 IdCol ::=  ID:E1
     {:
       RESULT = Dibujar.fromStringTable(E1);
@@ -129,12 +93,12 @@ IdCol ::=  ID:E1
       {:
         RESULT = E1;
       :};
-
 IdVar ::= NUMERO:E1
-	    {:
-		RESULT = E1;
-	    :}
+        {:
+        RESULT = E1;
+        :}
     | ID:E1
         {:
     RESULT = Dibujar.fromStringTable(E1);
         :};
+
