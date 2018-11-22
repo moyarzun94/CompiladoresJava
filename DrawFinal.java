@@ -20,15 +20,14 @@ public class DrawFinal extends JFrame {
   int xfix;
   int yfix;
 
-  //Constructor
   public DrawFinal()
   {
-    //Tamaño
+    //Tamaño ventana
     int width = 600;
     int height = 400;
 
     //Titulo
-    this.setTitle("Draw");
+    this.setTitle("Entorno Grafico");
     setSize( width, height );
 
     //Fondo
@@ -42,16 +41,15 @@ public class DrawFinal extends JFrame {
     Insets insets = this.getInsets();
       int wreal = width - (insets.left + insets.right);
       int hreal = height - (insets.top + insets.bottom);
+      //Arreglo para ventana grafica
       xfix = (int)((width - wreal)/2);
-
       yfix = (int)((height - hreal)- xfix);
       x1 = xfix;
       x2 = yfix;
 
-    System.out.println("Cargando Entorno Grafico...");
-    System.out.println("Ingrese Programa:");
+    System.out.println("Cargando Entorno Grafico... espere un momento");
+    System.out.println("Ingrese Instrucciones al Programa:");
 
-    //Doble Buffer
     createBufferStrategy(2);
     bf = this.getBufferStrategy();
 
@@ -68,11 +66,8 @@ public class DrawFinal extends JFrame {
     this.repaint();
   }
 
-  //Dibuja una Linea
   public void drawLinea(int tamaño, String seleccion)
   {
-    System.out.println(seleccion);
-
     switch(seleccion){
       case "arr":
       this.x2 = x1;
@@ -96,22 +91,13 @@ public class DrawFinal extends JFrame {
     this.repaint();
   }
 
-  //Dibuja un Rectangulo
 
   public void setPosition(int x, int y)
   {
-    System.out.println(x);
-
-    System.out.println(y);
-
     this.x1=x;
     this.y1=y;
-    System.out.println(this.x1);
-
-    System.out.println(this.y1);
   }
 
-  //Paint Doble Buffer
   @Override
   public void paint(Graphics g) {
     Graphics2D g2 = null;
@@ -145,14 +131,17 @@ public class DrawFinal extends JFrame {
     //Setea el Color
     g2.setColor(this.colorActual);
     //Antialiasing
+
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     //Gruesor del borde de las lineas
+
     g2.setStroke(new BasicStroke(2.0f));
 
-    //Acciones de Dibujar
-    switch(this.Dibujar)
+    //Si dibujar=1, entonces dibujara la linea correspondiente
+    if(this.Dibujar==1)
     {
-      case 1:  g2.drawLine(this.x1 +xfix, this.y1 +yfix, this.x2+xfix, this.y2+yfix );setPosition(this.x2,this.y2);break;
+      g2.drawLine(this.x1 +xfix, this.y1 +yfix, this.x2+xfix, this.y2+yfix );
+      setPosition(this.x2,this.y2);
 
     }
     this.Dibujar = 0;

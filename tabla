@@ -1,0 +1,739 @@
+Warning : *** Production "Dato ::= NCOLOR " never reduced
+Warning : *** Production "Dato ::= NUMERO " never reduced
+===== Terminals =====
+[0]EOF [1]error [2]EQ [3]COMA [4]LP 
+[5]RP [6]COLOR [7]SALTOLI [8]ABA [9]ARR 
+[10]DER [11]TERMINO [12]DAVALOR [13]IZQ [14]POS 
+[15]EDITAR [16]NCOLOR [17]NUMERO [18]ID 
+
+===== Non terminals =====
+[0]Inicio [1]Inst [2]Color [3]Linea [4]Pos 
+[5]Termino [6]DaValor [7]IdVar [8]IdCol [9]Dato 
+
+
+===== Productions =====
+[0] Inicio ::= EDITAR SALTOLI Inst 
+[1] $START ::= Inicio EOF 
+[2] Termino ::= TERMINO 
+[3] Inst ::= Pos SALTOLI Inst 
+[4] Inst ::= Color SALTOLI Inst 
+[5] Inst ::= Linea SALTOLI Inst 
+[6] Inst ::= DaValor SALTOLI Inst 
+[7] Inst ::= Termino SALTOLI 
+[8] Pos ::= POS LP IdVar COMA IdVar RP 
+[9] Color ::= COLOR LP IdCol RP 
+[10] Linea ::= DER LP IdVar RP 
+[11] Linea ::= IZQ LP IdVar RP 
+[12] Linea ::= ARR LP IdVar RP 
+[13] Linea ::= ABA LP IdVar RP 
+[14] DaValor ::= DAVALOR ID EQ NCOLOR 
+[15] DaValor ::= DAVALOR ID EQ NUMERO 
+[16] Dato ::= NUMERO 
+[17] Dato ::= NCOLOR 
+[18] IdCol ::= ID 
+[19] IdCol ::= NCOLOR 
+[20] IdVar ::= NUMERO 
+[21] IdVar ::= ID 
+
+===== Viable Prefix Recognizer =====
+START lalr_state [0]: {
+  [$START ::= (*) Inicio EOF , {EOF }]
+  [Inicio ::= (*) EDITAR SALTOLI Inst , {EOF }]
+}
+transition on Inicio to state [2]
+transition on EDITAR to state [1]
+
+-------------------
+lalr_state [1]: {
+  [Inicio ::= EDITAR (*) SALTOLI Inst , {EOF }]
+}
+transition on SALTOLI to state [4]
+
+-------------------
+lalr_state [2]: {
+  [$START ::= Inicio (*) EOF , {EOF }]
+}
+transition on EOF to state [3]
+
+-------------------
+lalr_state [3]: {
+  [$START ::= Inicio EOF (*) , {EOF }]
+}
+
+-------------------
+lalr_state [4]: {
+  [DaValor ::= (*) DAVALOR ID EQ NCOLOR , {SALTOLI }]
+  [Linea ::= (*) IZQ LP IdVar RP , {SALTOLI }]
+  [Pos ::= (*) POS LP IdVar COMA IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Linea SALTOLI Inst , {EOF }]
+  [Termino ::= (*) TERMINO , {SALTOLI }]
+  [Linea ::= (*) ABA LP IdVar RP , {SALTOLI }]
+  [Linea ::= (*) DER LP IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Termino SALTOLI , {EOF }]
+  [Inst ::= (*) Color SALTOLI Inst , {EOF }]
+  [DaValor ::= (*) DAVALOR ID EQ NUMERO , {SALTOLI }]
+  [Linea ::= (*) ARR LP IdVar RP , {SALTOLI }]
+  [Color ::= (*) COLOR LP IdCol RP , {SALTOLI }]
+  [Inicio ::= EDITAR SALTOLI (*) Inst , {EOF }]
+  [Inst ::= (*) DaValor SALTOLI Inst , {EOF }]
+  [Inst ::= (*) Pos SALTOLI Inst , {EOF }]
+}
+transition on DAVALOR to state [18]
+transition on Inst to state [17]
+transition on DaValor to state [16]
+transition on Pos to state [15]
+transition on TERMINO to state [14]
+transition on Linea to state [13]
+transition on ABA to state [12]
+transition on POS to state [11]
+transition on DER to state [10]
+transition on Color to state [9]
+transition on IZQ to state [8]
+transition on Termino to state [7]
+transition on ARR to state [6]
+transition on COLOR to state [5]
+
+-------------------
+lalr_state [5]: {
+  [Color ::= COLOR (*) LP IdCol RP , {SALTOLI }]
+}
+transition on LP to state [51]
+
+-------------------
+lalr_state [6]: {
+  [Linea ::= ARR (*) LP IdVar RP , {SALTOLI }]
+}
+transition on LP to state [48]
+
+-------------------
+lalr_state [7]: {
+  [Inst ::= Termino (*) SALTOLI , {EOF }]
+}
+transition on SALTOLI to state [47]
+
+-------------------
+lalr_state [8]: {
+  [Linea ::= IZQ (*) LP IdVar RP , {SALTOLI }]
+}
+transition on LP to state [44]
+
+-------------------
+lalr_state [9]: {
+  [Inst ::= Color (*) SALTOLI Inst , {EOF }]
+}
+transition on SALTOLI to state [42]
+
+-------------------
+lalr_state [10]: {
+  [Linea ::= DER (*) LP IdVar RP , {SALTOLI }]
+}
+transition on LP to state [39]
+
+-------------------
+lalr_state [11]: {
+  [Pos ::= POS (*) LP IdVar COMA IdVar RP , {SALTOLI }]
+}
+transition on LP to state [34]
+
+-------------------
+lalr_state [12]: {
+  [Linea ::= ABA (*) LP IdVar RP , {SALTOLI }]
+}
+transition on LP to state [29]
+
+-------------------
+lalr_state [13]: {
+  [Inst ::= Linea (*) SALTOLI Inst , {EOF }]
+}
+transition on SALTOLI to state [27]
+
+-------------------
+lalr_state [14]: {
+  [Termino ::= TERMINO (*) , {SALTOLI }]
+}
+
+-------------------
+lalr_state [15]: {
+  [Inst ::= Pos (*) SALTOLI Inst , {EOF }]
+}
+transition on SALTOLI to state [25]
+
+-------------------
+lalr_state [16]: {
+  [Inst ::= DaValor (*) SALTOLI Inst , {EOF }]
+}
+transition on SALTOLI to state [23]
+
+-------------------
+lalr_state [17]: {
+  [Inicio ::= EDITAR SALTOLI Inst (*) , {EOF }]
+}
+
+-------------------
+lalr_state [18]: {
+  [DaValor ::= DAVALOR (*) ID EQ NUMERO , {SALTOLI }]
+  [DaValor ::= DAVALOR (*) ID EQ NCOLOR , {SALTOLI }]
+}
+transition on ID to state [19]
+
+-------------------
+lalr_state [19]: {
+  [DaValor ::= DAVALOR ID (*) EQ NUMERO , {SALTOLI }]
+  [DaValor ::= DAVALOR ID (*) EQ NCOLOR , {SALTOLI }]
+}
+transition on EQ to state [20]
+
+-------------------
+lalr_state [20]: {
+  [DaValor ::= DAVALOR ID EQ (*) NUMERO , {SALTOLI }]
+  [DaValor ::= DAVALOR ID EQ (*) NCOLOR , {SALTOLI }]
+}
+transition on NCOLOR to state [22]
+transition on NUMERO to state [21]
+
+-------------------
+lalr_state [21]: {
+  [DaValor ::= DAVALOR ID EQ NUMERO (*) , {SALTOLI }]
+}
+
+-------------------
+lalr_state [22]: {
+  [DaValor ::= DAVALOR ID EQ NCOLOR (*) , {SALTOLI }]
+}
+
+-------------------
+lalr_state [23]: {
+  [DaValor ::= (*) DAVALOR ID EQ NCOLOR , {SALTOLI }]
+  [Linea ::= (*) IZQ LP IdVar RP , {SALTOLI }]
+  [Pos ::= (*) POS LP IdVar COMA IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Linea SALTOLI Inst , {EOF }]
+  [Termino ::= (*) TERMINO , {SALTOLI }]
+  [Linea ::= (*) ABA LP IdVar RP , {SALTOLI }]
+  [Linea ::= (*) DER LP IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Termino SALTOLI , {EOF }]
+  [Inst ::= (*) Color SALTOLI Inst , {EOF }]
+  [DaValor ::= (*) DAVALOR ID EQ NUMERO , {SALTOLI }]
+  [Linea ::= (*) ARR LP IdVar RP , {SALTOLI }]
+  [Inst ::= DaValor SALTOLI (*) Inst , {EOF }]
+  [Color ::= (*) COLOR LP IdCol RP , {SALTOLI }]
+  [Inst ::= (*) DaValor SALTOLI Inst , {EOF }]
+  [Inst ::= (*) Pos SALTOLI Inst , {EOF }]
+}
+transition on DAVALOR to state [18]
+transition on Inst to state [24]
+transition on DaValor to state [16]
+transition on Pos to state [15]
+transition on TERMINO to state [14]
+transition on Linea to state [13]
+transition on ABA to state [12]
+transition on POS to state [11]
+transition on DER to state [10]
+transition on Color to state [9]
+transition on IZQ to state [8]
+transition on Termino to state [7]
+transition on ARR to state [6]
+transition on COLOR to state [5]
+
+-------------------
+lalr_state [24]: {
+  [Inst ::= DaValor SALTOLI Inst (*) , {EOF }]
+}
+
+-------------------
+lalr_state [25]: {
+  [DaValor ::= (*) DAVALOR ID EQ NCOLOR , {SALTOLI }]
+  [Linea ::= (*) IZQ LP IdVar RP , {SALTOLI }]
+  [Pos ::= (*) POS LP IdVar COMA IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Linea SALTOLI Inst , {EOF }]
+  [Termino ::= (*) TERMINO , {SALTOLI }]
+  [Linea ::= (*) ABA LP IdVar RP , {SALTOLI }]
+  [Linea ::= (*) DER LP IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Termino SALTOLI , {EOF }]
+  [Inst ::= (*) Color SALTOLI Inst , {EOF }]
+  [DaValor ::= (*) DAVALOR ID EQ NUMERO , {SALTOLI }]
+  [Linea ::= (*) ARR LP IdVar RP , {SALTOLI }]
+  [Color ::= (*) COLOR LP IdCol RP , {SALTOLI }]
+  [Inst ::= Pos SALTOLI (*) Inst , {EOF }]
+  [Inst ::= (*) DaValor SALTOLI Inst , {EOF }]
+  [Inst ::= (*) Pos SALTOLI Inst , {EOF }]
+}
+transition on DAVALOR to state [18]
+transition on Inst to state [26]
+transition on DaValor to state [16]
+transition on Pos to state [15]
+transition on TERMINO to state [14]
+transition on Linea to state [13]
+transition on ABA to state [12]
+transition on POS to state [11]
+transition on DER to state [10]
+transition on Color to state [9]
+transition on IZQ to state [8]
+transition on Termino to state [7]
+transition on ARR to state [6]
+transition on COLOR to state [5]
+
+-------------------
+lalr_state [26]: {
+  [Inst ::= Pos SALTOLI Inst (*) , {EOF }]
+}
+
+-------------------
+lalr_state [27]: {
+  [DaValor ::= (*) DAVALOR ID EQ NCOLOR , {SALTOLI }]
+  [Linea ::= (*) IZQ LP IdVar RP , {SALTOLI }]
+  [Inst ::= Linea SALTOLI (*) Inst , {EOF }]
+  [Pos ::= (*) POS LP IdVar COMA IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Linea SALTOLI Inst , {EOF }]
+  [Termino ::= (*) TERMINO , {SALTOLI }]
+  [Linea ::= (*) ABA LP IdVar RP , {SALTOLI }]
+  [Linea ::= (*) DER LP IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Termino SALTOLI , {EOF }]
+  [Inst ::= (*) Color SALTOLI Inst , {EOF }]
+  [DaValor ::= (*) DAVALOR ID EQ NUMERO , {SALTOLI }]
+  [Linea ::= (*) ARR LP IdVar RP , {SALTOLI }]
+  [Color ::= (*) COLOR LP IdCol RP , {SALTOLI }]
+  [Inst ::= (*) DaValor SALTOLI Inst , {EOF }]
+  [Inst ::= (*) Pos SALTOLI Inst , {EOF }]
+}
+transition on DAVALOR to state [18]
+transition on Inst to state [28]
+transition on DaValor to state [16]
+transition on Pos to state [15]
+transition on TERMINO to state [14]
+transition on Linea to state [13]
+transition on ABA to state [12]
+transition on POS to state [11]
+transition on DER to state [10]
+transition on Color to state [9]
+transition on IZQ to state [8]
+transition on Termino to state [7]
+transition on ARR to state [6]
+transition on COLOR to state [5]
+
+-------------------
+lalr_state [28]: {
+  [Inst ::= Linea SALTOLI Inst (*) , {EOF }]
+}
+
+-------------------
+lalr_state [29]: {
+  [Linea ::= ABA LP (*) IdVar RP , {SALTOLI }]
+  [IdVar ::= (*) ID , {RP }]
+  [IdVar ::= (*) NUMERO , {RP }]
+}
+transition on IdVar to state [32]
+transition on ID to state [31]
+transition on NUMERO to state [30]
+
+-------------------
+lalr_state [30]: {
+  [IdVar ::= NUMERO (*) , {COMA RP }]
+}
+
+-------------------
+lalr_state [31]: {
+  [IdVar ::= ID (*) , {COMA RP }]
+}
+
+-------------------
+lalr_state [32]: {
+  [Linea ::= ABA LP IdVar (*) RP , {SALTOLI }]
+}
+transition on RP to state [33]
+
+-------------------
+lalr_state [33]: {
+  [Linea ::= ABA LP IdVar RP (*) , {SALTOLI }]
+}
+
+-------------------
+lalr_state [34]: {
+  [IdVar ::= (*) ID , {COMA }]
+  [IdVar ::= (*) NUMERO , {COMA }]
+  [Pos ::= POS LP (*) IdVar COMA IdVar RP , {SALTOLI }]
+}
+transition on IdVar to state [35]
+transition on ID to state [31]
+transition on NUMERO to state [30]
+
+-------------------
+lalr_state [35]: {
+  [Pos ::= POS LP IdVar (*) COMA IdVar RP , {SALTOLI }]
+}
+transition on COMA to state [36]
+
+-------------------
+lalr_state [36]: {
+  [IdVar ::= (*) ID , {RP }]
+  [IdVar ::= (*) NUMERO , {RP }]
+  [Pos ::= POS LP IdVar COMA (*) IdVar RP , {SALTOLI }]
+}
+transition on IdVar to state [37]
+transition on ID to state [31]
+transition on NUMERO to state [30]
+
+-------------------
+lalr_state [37]: {
+  [Pos ::= POS LP IdVar COMA IdVar (*) RP , {SALTOLI }]
+}
+transition on RP to state [38]
+
+-------------------
+lalr_state [38]: {
+  [Pos ::= POS LP IdVar COMA IdVar RP (*) , {SALTOLI }]
+}
+
+-------------------
+lalr_state [39]: {
+  [Linea ::= DER LP (*) IdVar RP , {SALTOLI }]
+  [IdVar ::= (*) ID , {RP }]
+  [IdVar ::= (*) NUMERO , {RP }]
+}
+transition on IdVar to state [40]
+transition on ID to state [31]
+transition on NUMERO to state [30]
+
+-------------------
+lalr_state [40]: {
+  [Linea ::= DER LP IdVar (*) RP , {SALTOLI }]
+}
+transition on RP to state [41]
+
+-------------------
+lalr_state [41]: {
+  [Linea ::= DER LP IdVar RP (*) , {SALTOLI }]
+}
+
+-------------------
+lalr_state [42]: {
+  [DaValor ::= (*) DAVALOR ID EQ NCOLOR , {SALTOLI }]
+  [Linea ::= (*) IZQ LP IdVar RP , {SALTOLI }]
+  [Pos ::= (*) POS LP IdVar COMA IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Linea SALTOLI Inst , {EOF }]
+  [Termino ::= (*) TERMINO , {SALTOLI }]
+  [Linea ::= (*) ABA LP IdVar RP , {SALTOLI }]
+  [Inst ::= Color SALTOLI (*) Inst , {EOF }]
+  [Linea ::= (*) DER LP IdVar RP , {SALTOLI }]
+  [Inst ::= (*) Termino SALTOLI , {EOF }]
+  [Inst ::= (*) Color SALTOLI Inst , {EOF }]
+  [DaValor ::= (*) DAVALOR ID EQ NUMERO , {SALTOLI }]
+  [Linea ::= (*) ARR LP IdVar RP , {SALTOLI }]
+  [Color ::= (*) COLOR LP IdCol RP , {SALTOLI }]
+  [Inst ::= (*) DaValor SALTOLI Inst , {EOF }]
+  [Inst ::= (*) Pos SALTOLI Inst , {EOF }]
+}
+transition on DAVALOR to state [18]
+transition on Inst to state [43]
+transition on DaValor to state [16]
+transition on Pos to state [15]
+transition on TERMINO to state [14]
+transition on Linea to state [13]
+transition on ABA to state [12]
+transition on POS to state [11]
+transition on DER to state [10]
+transition on Color to state [9]
+transition on IZQ to state [8]
+transition on Termino to state [7]
+transition on ARR to state [6]
+transition on COLOR to state [5]
+
+-------------------
+lalr_state [43]: {
+  [Inst ::= Color SALTOLI Inst (*) , {EOF }]
+}
+
+-------------------
+lalr_state [44]: {
+  [IdVar ::= (*) ID , {RP }]
+  [IdVar ::= (*) NUMERO , {RP }]
+  [Linea ::= IZQ LP (*) IdVar RP , {SALTOLI }]
+}
+transition on IdVar to state [45]
+transition on ID to state [31]
+transition on NUMERO to state [30]
+
+-------------------
+lalr_state [45]: {
+  [Linea ::= IZQ LP IdVar (*) RP , {SALTOLI }]
+}
+transition on RP to state [46]
+
+-------------------
+lalr_state [46]: {
+  [Linea ::= IZQ LP IdVar RP (*) , {SALTOLI }]
+}
+
+-------------------
+lalr_state [47]: {
+  [Inst ::= Termino SALTOLI (*) , {EOF }]
+}
+
+-------------------
+lalr_state [48]: {
+  [IdVar ::= (*) ID , {RP }]
+  [Linea ::= ARR LP (*) IdVar RP , {SALTOLI }]
+  [IdVar ::= (*) NUMERO , {RP }]
+}
+transition on IdVar to state [49]
+transition on ID to state [31]
+transition on NUMERO to state [30]
+
+-------------------
+lalr_state [49]: {
+  [Linea ::= ARR LP IdVar (*) RP , {SALTOLI }]
+}
+transition on RP to state [50]
+
+-------------------
+lalr_state [50]: {
+  [Linea ::= ARR LP IdVar RP (*) , {SALTOLI }]
+}
+
+-------------------
+lalr_state [51]: {
+  [IdCol ::= (*) NCOLOR , {RP }]
+  [IdCol ::= (*) ID , {RP }]
+  [Color ::= COLOR LP (*) IdCol RP , {SALTOLI }]
+}
+transition on IdCol to state [54]
+transition on NCOLOR to state [53]
+transition on ID to state [52]
+
+-------------------
+lalr_state [52]: {
+  [IdCol ::= ID (*) , {RP }]
+}
+
+-------------------
+lalr_state [53]: {
+  [IdCol ::= NCOLOR (*) , {RP }]
+}
+
+-------------------
+lalr_state [54]: {
+  [Color ::= COLOR LP IdCol (*) RP , {SALTOLI }]
+}
+transition on RP to state [55]
+
+-------------------
+lalr_state [55]: {
+  [Color ::= COLOR LP IdCol RP (*) , {SALTOLI }]
+}
+
+-------------------
+-------- ACTION_TABLE --------
+From state #0
+ [term 15:SHIFT(to state 1)]
+From state #1
+ [term 7:SHIFT(to state 4)]
+From state #2
+ [term 0:SHIFT(to state 3)]
+From state #3
+ [term 0:REDUCE(with prod 1)]
+From state #4
+ [term 6:SHIFT(to state 5)] [term 8:SHIFT(to state 12)]
+ [term 9:SHIFT(to state 6)] [term 10:SHIFT(to state 10)]
+ [term 11:SHIFT(to state 14)] [term 12:SHIFT(to state 18)]
+ [term 13:SHIFT(to state 8)] [term 14:SHIFT(to state 11)]
+From state #5
+ [term 4:SHIFT(to state 51)]
+From state #6
+ [term 4:SHIFT(to state 48)]
+From state #7
+ [term 7:SHIFT(to state 47)]
+From state #8
+ [term 4:SHIFT(to state 44)]
+From state #9
+ [term 7:SHIFT(to state 42)]
+From state #10
+ [term 4:SHIFT(to state 39)]
+From state #11
+ [term 4:SHIFT(to state 34)]
+From state #12
+ [term 4:SHIFT(to state 29)]
+From state #13
+ [term 7:SHIFT(to state 27)]
+From state #14
+ [term 7:REDUCE(with prod 2)]
+From state #15
+ [term 7:SHIFT(to state 25)]
+From state #16
+ [term 7:SHIFT(to state 23)]
+From state #17
+ [term 0:REDUCE(with prod 0)]
+From state #18
+ [term 18:SHIFT(to state 19)]
+From state #19
+ [term 2:SHIFT(to state 20)]
+From state #20
+ [term 16:SHIFT(to state 22)] [term 17:SHIFT(to state 21)]
+From state #21
+ [term 7:REDUCE(with prod 15)]
+From state #22
+ [term 7:REDUCE(with prod 14)]
+From state #23
+ [term 6:SHIFT(to state 5)] [term 8:SHIFT(to state 12)]
+ [term 9:SHIFT(to state 6)] [term 10:SHIFT(to state 10)]
+ [term 11:SHIFT(to state 14)] [term 12:SHIFT(to state 18)]
+ [term 13:SHIFT(to state 8)] [term 14:SHIFT(to state 11)]
+From state #24
+ [term 0:REDUCE(with prod 6)]
+From state #25
+ [term 6:SHIFT(to state 5)] [term 8:SHIFT(to state 12)]
+ [term 9:SHIFT(to state 6)] [term 10:SHIFT(to state 10)]
+ [term 11:SHIFT(to state 14)] [term 12:SHIFT(to state 18)]
+ [term 13:SHIFT(to state 8)] [term 14:SHIFT(to state 11)]
+From state #26
+ [term 0:REDUCE(with prod 3)]
+From state #27
+ [term 6:SHIFT(to state 5)] [term 8:SHIFT(to state 12)]
+ [term 9:SHIFT(to state 6)] [term 10:SHIFT(to state 10)]
+ [term 11:SHIFT(to state 14)] [term 12:SHIFT(to state 18)]
+ [term 13:SHIFT(to state 8)] [term 14:SHIFT(to state 11)]
+From state #28
+ [term 0:REDUCE(with prod 5)]
+From state #29
+ [term 17:SHIFT(to state 30)] [term 18:SHIFT(to state 31)]
+From state #30
+ [term 3:REDUCE(with prod 20)] [term 5:REDUCE(with prod 20)]
+From state #31
+ [term 3:REDUCE(with prod 21)] [term 5:REDUCE(with prod 21)]
+From state #32
+ [term 5:SHIFT(to state 33)]
+From state #33
+ [term 7:REDUCE(with prod 13)]
+From state #34
+ [term 17:SHIFT(to state 30)] [term 18:SHIFT(to state 31)]
+From state #35
+ [term 3:SHIFT(to state 36)]
+From state #36
+ [term 17:SHIFT(to state 30)] [term 18:SHIFT(to state 31)]
+From state #37
+ [term 5:SHIFT(to state 38)]
+From state #38
+ [term 7:REDUCE(with prod 8)]
+From state #39
+ [term 17:SHIFT(to state 30)] [term 18:SHIFT(to state 31)]
+From state #40
+ [term 5:SHIFT(to state 41)]
+From state #41
+ [term 7:REDUCE(with prod 10)]
+From state #42
+ [term 6:SHIFT(to state 5)] [term 8:SHIFT(to state 12)]
+ [term 9:SHIFT(to state 6)] [term 10:SHIFT(to state 10)]
+ [term 11:SHIFT(to state 14)] [term 12:SHIFT(to state 18)]
+ [term 13:SHIFT(to state 8)] [term 14:SHIFT(to state 11)]
+From state #43
+ [term 0:REDUCE(with prod 4)]
+From state #44
+ [term 17:SHIFT(to state 30)] [term 18:SHIFT(to state 31)]
+From state #45
+ [term 5:SHIFT(to state 46)]
+From state #46
+ [term 7:REDUCE(with prod 11)]
+From state #47
+ [term 0:REDUCE(with prod 7)]
+From state #48
+ [term 17:SHIFT(to state 30)] [term 18:SHIFT(to state 31)]
+From state #49
+ [term 5:SHIFT(to state 50)]
+From state #50
+ [term 7:REDUCE(with prod 12)]
+From state #51
+ [term 16:SHIFT(to state 53)] [term 18:SHIFT(to state 52)]
+From state #52
+ [term 5:REDUCE(with prod 18)]
+From state #53
+ [term 5:REDUCE(with prod 19)]
+From state #54
+ [term 5:SHIFT(to state 55)]
+From state #55
+ [term 7:REDUCE(with prod 9)]
+------------------------------
+-------- REDUCE_TABLE --------
+From state #0
+ [non term 0->state 2]
+From state #1
+From state #2
+From state #3
+From state #4
+ [non term 1->state 17] [non term 2->state 9] [non term 3->state 13]
+ [non term 4->state 15] [non term 5->state 7] [non term 6->state 16]
+From state #5
+From state #6
+From state #7
+From state #8
+From state #9
+From state #10
+From state #11
+From state #12
+From state #13
+From state #14
+From state #15
+From state #16
+From state #17
+From state #18
+From state #19
+From state #20
+From state #21
+From state #22
+From state #23
+ [non term 1->state 24] [non term 2->state 9] [non term 3->state 13]
+ [non term 4->state 15] [non term 5->state 7] [non term 6->state 16]
+From state #24
+From state #25
+ [non term 1->state 26] [non term 2->state 9] [non term 3->state 13]
+ [non term 4->state 15] [non term 5->state 7] [non term 6->state 16]
+From state #26
+From state #27
+ [non term 1->state 28] [non term 2->state 9] [non term 3->state 13]
+ [non term 4->state 15] [non term 5->state 7] [non term 6->state 16]
+From state #28
+From state #29
+ [non term 7->state 32]
+From state #30
+From state #31
+From state #32
+From state #33
+From state #34
+ [non term 7->state 35]
+From state #35
+From state #36
+ [non term 7->state 37]
+From state #37
+From state #38
+From state #39
+ [non term 7->state 40]
+From state #40
+From state #41
+From state #42
+ [non term 1->state 43] [non term 2->state 9] [non term 3->state 13]
+ [non term 4->state 15] [non term 5->state 7] [non term 6->state 16]
+From state #43
+From state #44
+ [non term 7->state 45]
+From state #45
+From state #46
+From state #47
+From state #48
+ [non term 7->state 49]
+From state #49
+From state #50
+From state #51
+ [non term 8->state 54]
+From state #52
+From state #53
+From state #54
+From state #55
+-----------------------------
+------- CUP v0.11b 20160615 (GIT 4ac7450) Parser Generation Summary -------
+  0 errors and 2 warnings
+  19 terminals, 10 non-terminals, and 22 productions declared, 
+  producing 56 unique parse states.
+  0 terminals declared but not used.
+  0 non-terminals declared but not used.
+  0 productions never reduced.
+  0 conflicts detected (0 expected).
+  Code written to "parser.java", and "sym.java".
+---------------------------------------------------- (CUP v0.11b 20160615 (GIT 4ac7450))
+
